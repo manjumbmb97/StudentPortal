@@ -1,0 +1,52 @@
+{% extends 'applicant/base.html' %}
+
+{% block title %}Fee Payment Details{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-offset-3 col-md-offset-3 col-sm-6 col-md-6">
+				<div class="panel">
+					<div class="panel-body">
+						{% include 'applicant/messages.html' %}
+						<h3 class="text-center">Fees paid</h3>
+						<table class="table">
+							<tbody>
+								<tr>
+									<th>Transaction no : </th>
+									<td>{{ fee.transaction_no }}</td>
+								</tr>
+								<tr>
+									<th>Application no : </th>
+									<td>{{ fee.application.application_no }}</td>
+								</tr>
+								<tr>
+									<th>Applicant name : </th>
+									<td>{{ fee.application.applicant_name }}</td>
+								</tr>
+								<tr>
+									<th>Fee paid : </th>
+									<td>{{ fee.fees }}</td>
+								</tr>
+								<tr>
+									<th>Paid on : </th>
+									<td>{{ fee.paid_on }}</td>
+								</tr>
+								<tr>
+									<th>Paid through : </th>
+									<td>{{ fee.get_fee_type_display }}</td>
+								</tr>
+								<tr>
+									<th>Receipt : </th>
+									<td><a href="{{ fee.fee_receipt.url }}">View</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

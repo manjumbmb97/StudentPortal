@@ -1,0 +1,116 @@
+<html>
+<head>
+	<title>Acknowledgement</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'portal/base.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'portal/pdf.css' %}">
+</head>
+<body>
+	<div class="pdf-header">
+		<div class="form-header">
+			<table class="pdf-table">
+				<tbody>
+					<tr>
+						<td style="border: 0;" width="100">
+							<img src="{% static 'portal/logo.png' %}" height="100" />
+						</td>
+						<td style="border: 0;" width="400">
+							<h4 align="center"><strong>Hindustan Shipyard Limited</strong></h4>
+							<h4 align="center">Visakhapatnam-530 005</h4>
+							<h3 align="center"><strong>Acknowledgement Slip</strong></h3>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="pdf-photo">
+			<img src="{{ application.applicant_photo.url }}" alt="{{ application.applicant_name }}" width="110px" />
+		</div>
+	</div>
+		
+		
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th colspan="4" style="text-align: center;">
+					<h3>{{ application.application_no }}</h3>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>Name</th>
+				<td>
+					{{ application.applicant_name }}
+				</td>
+				<th>Date of birth</th>
+				<td>{{ application.date_of_birth }}</td>
+			</tr>
+			<tr>
+				<th>Mobile no</th>
+				<td>{{ application.mobile_no }}</td>
+				<th>E-mail</th>
+				<td>{{ application.email }}</td>		
+			</tr>
+			<tr>
+				<th>Gender</th>
+				<td>{{ application.get_gender_display }}</td>
+				<th>Caste</th>
+				<td>{{ application.caste }}</td>
+			</tr>
+			<tr>
+				<th>Course</th>
+				<td>{{ application.course }}</td>
+				<th>Department</th>
+				<td>{{ application.user.applicant.get_department_display }}</td>
+			</tr>
+			<tr>
+				<th>College name</th>
+				<td colspan="3">{{ application.college_name }}</td>
+			</tr>
+			<tr>
+				<th>College Address</th>
+				<td colspan="3">{{ application.college_address }}</td>
+			</tr>
+			<tr>
+				<th>Residential Adddress</th>
+				<td colspan="3">{{ application.residence_address }}</td>
+			</tr>
+			<tr>
+				<th>Internship type</th>
+				<td>{{ application.user.applicant.get_internship_type_display }}</td>
+				<th>Slot</th>
+				<td>{{ application.slot.start_date }} - {{ application.slot.end_date }}</td>
+			</tr>
+			{% if fee.verified %}
+				<tr>
+					<th colspan="4"><h4 align="center">Fee details</h4></th>
+				</tr>
+				<tr>
+					<th>Transaction no</th>
+					<td>{{fee.transaction_no}}</td>
+					<th>Fee amount paid</th>
+					<td>{{fee.fees}}</td>
+				</tr>
+				<tr>
+					<th colspan="4"><h4 align="center">{{application.user.applicant.get_internship_type_display}} details</h4></th>
+				</tr>
+				<tr>
+					<th>Reporting date</th>
+					<td>{{ application.user.applicant.reporting_date|date }}</td>
+					<th>Reporting time</th>
+					<td>{{ application.user.applicant.reporting_date|time }}</td>
+				</tr>
+			{% endif %}
+		</tbody>
+	</table>
+	<div class="container-fluid" style="text-align: center;">
+		<button class="btn btn-success btn-xs" onclick="window.print()">
+			Print			
+		</button>
+	</div>
+</body>

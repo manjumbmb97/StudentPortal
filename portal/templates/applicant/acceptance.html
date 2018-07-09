@@ -1,0 +1,165 @@
+<html>
+<head>
+	<title>Acceptance</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'portal/base.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'portal/pdf.css' %}">
+</head>
+<body>
+	<div class="pdf-header">
+		<div>
+			<table class="pdf-table" style="width: 790px; border-bottom: 2px dashed black;">
+				<tbody>
+					<tr>
+						<td style="border: 0;padding-left: 30px; padding-right: 30px;" width="500">
+							<h4 align="right"><strong>Hindustan Shipyard Limited</strong></h4>
+							<h5 align="right">(A Govt. of India Undertaking)</h5>
+							<h5 align="right">Gandhigram,</h5>
+							<h5 align="right">Visakhapatnam - 530 005, INDIA</h5>
+							<h5 align="right">(An ISO - 9001:2008 Company)</h5>
+						</td>
+						<td style="border: 0;padding-left: 50px; padding-right: 50px;" width="400">
+							<img src="{% static 'portal/logo.png' %}" alt="hsl" height="100px" width="100px" />
+						</td>
+						<td style="border: 0;padding-left: 30px; padding-right: 30px;" width="500">
+							<h4 align="left"><strong>हिन्दुस्तान शिपयार्ड लि.</strong></h4>
+							<h5 align="left">(भारत सरकार का उपक्रम)</h5>
+							<h5 align="left">गाधीग्राम, </h5>
+							<h5 align="left">विशाखपट्टणम – 530 005 भारत</h5>
+							<h5 align="left">(आईएसऔ - 9001:2008 कंपनी)</h5>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="pdf-header" style="display: block; clear: both; margin-bottom: 20px;">
+		<div class="container-fluid" style="float: left; margin-top: 10px;" align="left">
+		--TRG/239 /23/132    	
+		</div>
+		<div class="container-fluid" style="float: right; margin-top: 10px;" align="right">
+			Date: 26/06/2018
+		</div>
+	</div>
+
+	<table style="border: 0;margin-left: 0;clear: both;">
+		<tr>
+			<td>To,</td>
+		</tr>
+		<tr>
+			<td>{{ application.college_name }}</td>
+		</tr>
+		<tr>
+			<td>{{ application.college_address }}</td>
+		</tr>
+		<tr>
+			<td style="padding-top: 20px; padding-bottom: 10px;">Sir,</td>
+		</tr>
+		<tr>
+			<td style="padding-left: 20px;">Sub: Acceptance of your request for {{ application.user.applicant.get_internship_type_display }}</td>
+		</tr>
+		<tr>
+			<td style="padding-left: 20px;">Ref:  Your letter No: LTR/342/2324 dated 21 / 04 / 2018.</td>
+		</tr>
+		<tr>
+			<td style="padding-left: 20px; padding-top: 10px;">1. With Reference to your letter cited above, we are pleased to inform that permission is granted to your students for {{ application.user.applicant.get_internship_type_display }} from {{ application.slot.start_date }} to {{ application.slot.end_date }}.</td>
+		</tr>
+		<tr>
+			<td style="padding-left: 20px; padding-top: 10px;">
+				<table class="details-table">
+					<thead>
+						<tr>
+							<td style="padding:5px; border: 1px solid black;">Sl.no</td>
+							<td style="padding:5px; border: 1px solid black;">Name of student</td>
+							<td style="padding:5px; border: 1px solid black;">Course</td>
+						</tr>
+					</thead>
+					<tbody>
+						{% for application in applications %}
+							<tr>
+								<td style="padding:5px; border: 1px solid black;">{{ forloop.counter }}</td>
+								<td style="padding:5px; border: 1px solid black;">{{ application.applicant_name }}</td>
+								<td style="padding:5px; border: 1px solid black;">{{ application.course }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding-left: 20px; padding-top: 10px;">1. You are hereby advised to comply with the following conditions:</td>
+		</tr>
+		<tr>
+			<td style="padding-left: 20px; padding-top: 10px;">
+				<ul style="list-style-type: lower-alpha;">
+					<li>The Training charges will be Rs. 2,000/- (Two thousand rupees only) per Head per Month. The amount may be paid by Demand Draft drawn in favor of “HINDUSTAN SHIPYARD LIMITED” payable at Visakhapatnam or Challan drawn at SBI / UCO branches of Hindustan Shipyard.</li>
+					<li>HSL will not provide facilities like Transport, Lodging & Boarding.</li>
+					<li>Safety rules are to be followed in the yard and the student has to be insured covering the above duration.</li>
+					<li>The above students are required to submit the indemnity bond individually on a non-judicial stamp paper of a minimum denomination indemnifying HSL towards any untoward incident/accident that if occur. (Indemnity bond copy enclosed)</li>
+					<li>
+						The students may be advised to report to the undersigned office with following:
+						<ul style="list-style-type: upper-roman;">
+							<li>Photostat copy of this letter.</li>
+							<li>Identity card issued by Institute.</li>
+							<li> DD / challan towards the training fee.</li>
+							<li> Safety Shoes & Safety Helmet</li>
+							<li>Two stamp size & 03 no’s colour pass port size photographs</li>
+							<li>Photostat copy of student covered insurance policy.</li>
+							<li>Indemnity Bond duly signed by the student (also with natural / legal guardian for minor)</li>
+							<li>Gazetted officer attested copy of SC / ST caste certificate for fee concession.</li>
+						</ul>
+					</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+
+	<div style="display: block; clear: both; margin-top: 20px;">
+		<div class="container-fluid" style="float: left; margin-top: 10px;" align="left">
+			Thanking you,	
+		</div>
+		<div class="container-fluid" style="float: right; margin-top: 10px; margin-bottom: 20px;" align="right">
+			Yours faithfully,<br>
+			For Hindustan Shipyard Ltd.
+		</div>
+	</div>
+
+
+		<div style="clear: both;">
+			<table style="width: 790px; border-top: 2px dashed black; font-size: 10pt;">
+				<tbody>
+					<tr>
+						<td style="border: 0;" width="600" colspan="2">
+							<h5 align="center">Registered office: Gandhigram, Gandhigram P.O; Visakhapatnam - 530005</h5>
+						</td>
+						
+					</tr>
+					<tr>
+						<td style="border: 0;padding-left: 30px; padding-right: 30px;" width="400">
+							<span align="left">Fax: (+91-891) 2577502, 2577356  </span>
+							<span align="left">Web: www.hsl.gov.in</span>
+						</td>
+						<td style="border: 0;padding-left: 30px; padding-right: 30px;" width="400">
+							<span align="right">Contact: 9493792220</span>
+							<span align="right">Mail Id: mtraining@hslvizag.in</span>
+						</td>
+					</tr>
+					<tr>
+						<td style="border: 0;" width="600" colspan="2">
+							<h5 align="center"><b>CIN: U74899AP1952G0I076711</b></h5>
+						</td>
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	<div class="container-fluid" style="display: block; clear: both; margin-top: 50px;" align="center">
+		<button class="btn btn-success btn-xs" onclick="window.print()">
+			print		
+		</button>
+	</div>
+</body>

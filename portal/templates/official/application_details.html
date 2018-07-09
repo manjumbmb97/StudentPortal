@@ -1,0 +1,111 @@
+{% extends 'applicant/base.html' %}
+
+{% block title %}Application Details{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-offset-3 col-md-offset-3 col-sm-6 col-md-6 col-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					{% include 'official/messages.html' %}
+					<div style="border: 1px solid black;height: 142px;width: 110px; margin: 0 auto;">
+						<img src="{{ application.applicant_photo.url }}" alt="{{ application.applicant_name }}" width="110px" />
+					</div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th colspan="4" style="text-align: center;">
+									<h3>{{ application.application_no }}</h3>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>Name</th>
+								<td>
+									{{ application.applicant_name }}
+								</td>
+								<th>Date of birth</th>
+								<td>{{ application.date_of_birth }}</td>
+							</tr>
+							<tr>
+								<th>Mobile no</th>
+								<td>{{ application.mobile_no }}</td>
+								<th>E-mail</th>
+								<td>{{ application.email }}</td>		
+							</tr>
+							<tr>
+								<th>Gender</th>
+								<td>{{ application.get_gender_display }}</td>
+								<th>Caste</th>
+								<td>{{ application.caste }}</td>
+							</tr>
+							<tr>
+								<th>Course</th>
+								<td>{{ application.course }}</td>
+								<th>Department</th>
+								<td>{{ application.user.applicant.get_department_display }}</td>
+							</tr>
+							<tr>
+								<th>College name</th>
+								<td colspan="3">{{ application.college_name }}</td>
+							</tr>
+							<tr>
+								<th>College Address</th>
+								<td colspan="3">{{ application.college_address }}</td>
+							</tr>
+							<tr>
+								<th>Residential Adddress</th>
+								<td colspan="3">{{ application.residence_address }}</td>
+							</tr>
+							<tr>
+								<th>Internship type</th>
+								<td>{{ application.user.applicant.get_internship_type_display }}</td>
+								<th>Slot</th>
+								<td>{{ application.slot.start_date }} - {{ application.slot.end_date }} </td>
+							</tr>
+							<tr>
+								<th>Group leader username</th>
+								<td colspan="3">{{ application.user }}</td>
+							</tr>
+							<tr>
+								<th colspan="4" class="text-center">Documents uploaded</th>
+							</tr>
+							<tr>
+								<th>NOC</th>
+								<td><a href="{{ application.noc.url }}">View</a></td>
+								<th>Caste certificate</th>
+								<td><a href="{{ application.caste_certificate.url }}">View</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<h2 class="text-center">Actions on application</h2>
+					<div class="submit-row onesubmit">
+						{% if not application.verified %}
+							<a href="{% url 'portal:application-verify' application.id %}"><button type="button" class="btn btn-success">Verified</button></a>
+							<a href="{% url 'portal:application-reject' application.id %}"><button type="button" class="btn btn-danger">Reject</button></a>
+						{% else %}
+							Application Verified
+						{% endif %}
+					</div>
+					<h2 class="text-center">Action on fee payment</h2>
+					<div class="submit-row onesubmit">
+						{% if application.fee.is_fees_paid %}
+							{% if application.fee.verified %}
+								Fee payment verified
+							{% else %}
+								<a href="{% url 'portal:fee-details' application.fee.id %}"><button type="button" class="btn btn-info">View Fee Details</button></a>
+							{% endif %}
+						{% else %}
+							Fee not paid
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

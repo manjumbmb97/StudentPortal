@@ -1,0 +1,32 @@
+{% extends 'applicant/base.html' %}
+
+{% block title %}Application Submitted{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-offset-3 col-md-offset-3 col-sm-6 col-md-6 col-12">
+			<div class="panel panel-default">
+				<div class="panel-body text-center">
+					{% include 'applicant/messages.html' %}
+					<h3>Challan payment</h3>
+					<h4>Download the challan below and fill the fees in the bank</h4>
+					<a href=""><button type="button" class="btn btn-success">Download challan &nbsp;<span class="glyphicon glyphicon-download"></span></button></a>	<br/>
+					<h4>If you have paid the fees fill the details below and wait for verification</h4>
+					<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div>
+							{% include 'applicant/form_template.html' %}
+							<div class="submit-row onesubmit">
+								<button type="submit" class="btn btn-success">Submit</button>
+							</div>
+						</div>	
+					</form>		
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

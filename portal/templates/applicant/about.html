@@ -1,0 +1,16 @@
+{% extends 'applicant/base.html' %}
+
+{% block title %}About us{% endblock %}
+
+{% load staticfiles %}
+
+{% block content %}
+	<div class="container-fluid">
+		<div class="text-center">
+			<h1><b>About us</b></h1>
+		</div>
+		<div class="text-center">
+			<img src="{% static 'portal/logo.png' %}" />
+		</div>
+	</div>
+{% endblock %}
