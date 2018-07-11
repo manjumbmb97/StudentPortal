@@ -39,8 +39,6 @@ def signup(request):
 		profile_form = ApplicantForm(request.POST,request.FILES)
 		if user_form.is_valid() and profile_form.is_valid():
 			new_user = user_form.save(commit=False)
-			if User.objects.filter(email__iexact=user_form.cleaned_data['email']):
-				raise forms.ValidationError("Email id already exists")
 			new_user.set_password(user_form.cleaned_data['password2'])
 			new_user.save()
 			profile=Applicant.objects.create(user=new_user)

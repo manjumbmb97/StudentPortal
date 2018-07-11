@@ -8,6 +8,15 @@ class UserForm(UserCreationForm):
 		model = User
 		fields = ['username', 'first_name', 'last_name','email', 'password1', 'password2',]
 
+	def clean_email(self):
+        """
+        Validate that the supplied email address is unique for the
+        site.
+        """
+		if User.objects.filter(email__iexact=self.cleaned_data['email']):
+			raise forms.ValidationError("Email id already exists")
+		return self.cleaned_data['email']
+
 class ApplicantForm(forms.ModelForm):
 	class Meta:
 		model = Applicant
